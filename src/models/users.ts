@@ -70,4 +70,17 @@ export class UserStore {
             throw new Error(`Can not delete user ${error}`)
         }
     }
+
+    async authenticate(firstname: string, lastname: string): Promise<User> {
+        try {
+            const conn = await db.connect();
+            const sql = 'SELECT * FROM users WHERE firstname = $1 AND lastname = $2';
+            const result = await conn.query(sql, [firstname, lastname]);
+            if(result.rowCount == 0)
+                throw new Error('User does not exist');
+            return result.rows[0];
+        } catch (error) {
+            throw new Error(`Can not get user ${error}`)
+        }
+    }
 }

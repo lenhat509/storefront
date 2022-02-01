@@ -91,5 +91,20 @@ class UserStore {
             }
         });
     }
+    authenticate(firstname, lastname) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const conn = yield database_1.default.connect();
+                const sql = 'SELECT * FROM users WHERE firstname = $1 AND lastname = $2';
+                const result = yield conn.query(sql, [firstname, lastname]);
+                if (result.rowCount == 0)
+                    throw new Error('User does not exist');
+                return result.rows[0];
+            }
+            catch (error) {
+                throw new Error(`Can not get user ${error}`);
+            }
+        });
+    }
 }
 exports.UserStore = UserStore;

@@ -31,7 +31,7 @@ const dummyUsers = [
         password: 'lenhat'
     }
 ];
-describe("Tests User Model", () => {
+xdescribe("Tests User Model", () => {
     describe('Test create function', () => {
         it('Expecting user Nhat Le is created', () => __awaiter(void 0, void 0, void 0, function* () {
             const user = dummyUsers[0];
