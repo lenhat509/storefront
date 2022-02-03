@@ -1,7 +1,7 @@
 import { Order, OrderStore, Status } from '../models/orders'
 import express, { Request, Response } from 'express';
 import { verifyOrderPossession} from '../middleware/authentication'
-
+import { store as orderProductStore } from './order_products';
 
 export const store = new OrderStore();
 
@@ -39,6 +39,9 @@ const showActive = async (req: Request, res: Response) => {
 const complete = async (req: Request, res: Response) => {
     try {
         const id = parseInt(req.params.id);
+        const products = await orderProductStore.showProducts(id);
+        if(products.length === 0)
+            throw new Error('The cart is empty/ invalid')
         const order = await store.complete(id);
         const newOrder = await store.create(order.user_id);
         res.json({order, newOrder});

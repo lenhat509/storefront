@@ -14,7 +14,6 @@ export const verifiedAuthentication = (req: Request, res: Response, next: any) =
         req.body.userJWTId = payload.id;
         next()
     } catch (error: any) {
-        //res.json(error.messages);
         return res.sendStatus(401);
     }
     
@@ -30,7 +29,6 @@ export const verifiedAuthorization = (req: Request, res: Response, next: any) =>
             return res.sendStatus(403)
         next()
     } catch (error: any) {
-        //res.json(error.messages);
         return res.sendStatus(403);
     }
     
