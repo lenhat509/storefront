@@ -5,12 +5,13 @@ import { myProductsRoutes } from './handlers/products';
 import { myOrdersRoutes } from './handlers/orders';
 import { myOrderProductRoutes } from './handlers/order_products';
 import bodyParser from 'body-parser'
+import cors from 'cors';
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT
 
-
+app.use(cors())
 app.use(bodyParser.json());
 
 myUsersRoutes(app);
