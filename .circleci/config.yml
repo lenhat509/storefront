@@ -1,0 +1,34 @@
+version: 2.1
+orbs: 
+  aws-cli: circleci/aws-cli@1.3.1
+  node: circleci/node@2.0.2 
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - node/install
+      - checkout
+      - run:
+          name: install packages
+          command: npm run server:install
+      - run:
+          name: build server
+          command: npm run server:build
+      - run:
+          name: migrate database
+          command: npm run server:db-create
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - node/install
+      - run:
+          name: deploy server
+          command: npm run server:start
+
+workflow:
+  myserver:
+    jobs:
+      - build
+      - deploy
