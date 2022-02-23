@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
-    "jasmine": "jasmine",
-    "start": "nodemon src/index.ts",
-    "test": "db-migrate --env test up 20220129200244-products && npm run build && npm run jasmine && db-migrate --env test down"
+    "server:install": "npm install",
+    "server:build": "npx tsc",
+    "server:db-create": "db-migrate up",
+    "server:start": "node dist/index.js"
   },
   "author": "Nhat Le",
   "license": "ISC",
