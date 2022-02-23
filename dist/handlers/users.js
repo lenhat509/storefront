@@ -17,6 +17,7 @@ const users_1 = require("../models/users");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const orders_1 = require("./orders");
 const authentication_1 = require("../middleware/authentication");
 dotenv_1.default.config();
 const { SECRET_PASSWORD: pepper, SALT_ROUNDS: saltRounds, SECRET_TOKEN: secret } = process.env;
@@ -50,7 +51,8 @@ const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const passwordEncrypted = bcrypt_1.default.hashSync(password + pepper, parseInt(saltRounds));
         const user = yield store.create(firstname, lastname, passwordEncrypted);
         const token = jsonwebtoken_1.default.sign(user, secret);
-        res.json({ user, token });
+        const cart = yield orders_1.store.create(user.id);
+        res.json({ user, cart, token });
     }
     catch (error) {
         res.status(400);
@@ -101,7 +103,7 @@ const destroy = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 const myUsersRoutes = (app) => {
-    app.get('/users', authentication_1.verifiedAuthentication, index);
+    app.get('/users', index);
     app.get('/user/:id', authentication_1.verifiedAuthentication, show);
     app.post('/user/signup', create);
     app.post('/user/signin', authenticate);

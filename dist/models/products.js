@@ -45,12 +45,12 @@ class ProductStore {
             }
         });
     }
-    create(name, price) {
+    create(name, price, user_id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const conn = yield database_1.default.connect();
-                const sql = 'INSERT INTO products (name, price) VALUES($1, $2) RETURNING *';
-                const result = yield conn.query(sql, [name, price]);
+                const sql = 'INSERT INTO products (name, price, user_id) VALUES($1, $2, $3) RETURNING *';
+                const result = yield conn.query(sql, [name, price, user_id]);
                 conn.release();
                 return result.rows[0];
             }

@@ -22,6 +22,7 @@ const getProductsDetail = async (products: OrderProduct[]) => {
             product_id: productDetail.id,
             name: productDetail.name,
             price: productDetail.price,
+            user_id: productDetail.user_id,
             quantity: item.quantity
         }
     })

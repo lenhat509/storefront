@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.myProductsRoutes = void 0;
+exports.myProductsRoutes = exports.store = void 0;
 const products_1 = require("../models/products");
 const authentication_1 = require("../middleware/authentication");
-const store = new products_1.ProductStore();
+exports.store = new products_1.ProductStore();
 const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const products = yield store.index();
+        const products = yield exports.store.index();
         res.json(products);
     }
     catch (error) {
@@ -26,7 +26,7 @@ const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 const show = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = parseInt(req.params.id);
-        const product = yield store.show(id);
+        const product = yield exports.store.show(id);
         res.json(product);
     }
     catch (error) {
@@ -38,7 +38,8 @@ const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const name = req.body.name;
         const price = req.body.price;
-        const product = yield store.create(name, price);
+        const user_id = req.body.userJWTId;
+        const product = yield exports.store.create(name, price, user_id);
         res.json(product);
     }
     catch (error) {
@@ -51,7 +52,7 @@ const update = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const id = parseInt(req.params.id);
         const name = req.body.name;
         const price = req.body.price;
-        const product = yield store.update(id, name, price);
+        const product = yield exports.store.update(id, name, price);
         res.json(product);
     }
     catch (error) {
@@ -62,7 +63,7 @@ const update = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 const destroy = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = parseInt(req.params.id);
-        const product = yield store.delete(id);
+        const product = yield exports.store.delete(id);
         res.json(product);
     }
     catch (error) {
@@ -74,7 +75,7 @@ const myProductsRoutes = (app) => {
     app.get('/products', index);
     app.get('/product/:id', show);
     app.post('/product/create', authentication_1.verifiedAuthentication, create);
-    app.put('/product/update/:id', authentication_1.verifiedAuthorization, update);
-    app.delete('/product/delete/:id', authentication_1.verifiedAuthorization, destroy);
+    app.put('/product/update/:id', authentication_1.verifyPossession, update);
+    app.delete('/product/delete/:id', authentication_1.verifyPossession, destroy);
 };
 exports.myProductsRoutes = myProductsRoutes;

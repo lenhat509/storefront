@@ -98,7 +98,7 @@ const destroy = async (req: Request, res: Response) => {
 }
 
 export const myUsersRoutes = (app: express.Application) => {
-    app.get('/users', verifiedAuthentication, index);
+    app.get('/users', index);
     app.get('/user/:id', verifiedAuthentication, show);
     app.post('/user/signup', create);
     app.post('/user/signin', authenticate);
