@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=14",
+    "npm": ">=6"
+  },
   "scripts": {
     "server:install": "npm install",
-    "server:build": "npx tsc",
+    "server:build": "npx tsc && cp -r ./migrations ./dist/migrations && cp -r ./spec ./dist/spec && cp package.json ./dist/package.json && cp database.json ./dist/database.json && cp .npmrc ./dist/.npmrc && cd dist && zip -r server.zip . && cd ..",
     "server:db-create": "db-migrate up",
-    "server:start": "nodemon src/index.ts"
+    "server:start": "node src/index.js"
   },
   "author": "Nhat Le",
   "license": "ISC",
@@ -15,7 +19,6 @@
     "@types/bcrypt": "^5.0.0",
     "@types/body-parser": "^1.19.2",
     "@types/cors": "^2.8.12",
-    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/jasmine": "^3.10.3",
     "@types/jsonwebtoken": "^8.5.8",
@@ -26,12 +29,11 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.2.2",
-    "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "jasmine": "^4.0.2",
     "jasmine-spec-reporter": "^7.0.0",

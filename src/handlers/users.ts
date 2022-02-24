@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { store as orderStore } from './orders';
 import { verifiedAuthentication, verifiedAuthorization} from '../middleware/authentication'
-dotenv.config();
+
 const {
     SECRET_PASSWORD: pepper,
     SALT_ROUNDS: saltRounds,

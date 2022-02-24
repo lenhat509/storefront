@@ -4,7 +4,7 @@ import express, {Request, Response } from 'express';
 import { User } from '../models/users';
 import { store as productStore } from '../handlers/products';
 import { store as orderStore} from '../handlers/orders'
-dotenv.config();
+
 
 export const verifiedAuthentication = (req: Request, res: Response, next: any) => {
     try {
