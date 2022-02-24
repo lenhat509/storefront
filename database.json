@@ -4,6 +4,7 @@
         "user": { "ENV" : "POSTGRES_USER" },
         "password" : { "ENV" : "POSTGRES_PASSWORD" },
         "database": { "ENV" : "POSTGRES_DB" },
+        "port": { "ENV" : "POSTGRES_PORT" },
         "driver": "pg"
     },
     "test": {
@@ -11,6 +12,7 @@
         "user": { "ENV" : "POSTGRES_USER" },
         "password" : { "ENV" : "POSTGRES_PASSWORD" },
         "database": { "ENV" : "POSTGRES_DB_TEST" },
+        "port": { "ENV" : "POSTGRES_PORT" },
         "driver": "pg"
     }
 }

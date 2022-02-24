@@ -8,7 +8,8 @@ const {
     POSTGRES_USER,
     POSTGRES_DB_TEST,
     POSTGRES_PASSWORD,
-    ENV
+    ENV,
+    POSTGRES_PORT
 } = process.env
 
 let db: Pool;
@@ -18,7 +19,8 @@ if(ENV == "test")
         host: POSTGRES_HOST,
         database: POSTGRES_DB_TEST,
         user: POSTGRES_USER,
-        password: POSTGRES_PASSWORD
+        password: POSTGRES_PASSWORD,
+        port: parseInt(POSTGRES_PORT as string)
     })
 }
 else
@@ -27,7 +29,8 @@ else
         host: POSTGRES_HOST,
         database: POSTGRES_DB,
         user: POSTGRES_USER,
-        password: POSTGRES_PASSWORD
+        password: POSTGRES_PASSWORD,
+        port: parseInt(POSTGRES_PORT as string)
     })
 }
 

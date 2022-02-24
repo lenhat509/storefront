@@ -7,7 +7,7 @@
     "server:install": "npm install",
     "server:build": "npx tsc",
     "server:db-create": "db-migrate up",
-    "server:start": "node dist/index.js"
+    "server:start": "nodemon src/index.ts"
   },
   "author": "Nhat Le",
   "license": "ISC",
