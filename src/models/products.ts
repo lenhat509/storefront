@@ -1,5 +1,4 @@
 import db from "../database";
-import { User } from "./users";
 
 export type Product = {
     id: number,

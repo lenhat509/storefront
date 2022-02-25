@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 import express, {Request, Response } from 'express';
 import { User } from '../models/users';
 import { store as productStore } from '../handlers/products';

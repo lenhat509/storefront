@@ -1,7 +1,6 @@
 import { User, UserStore } from '../models/users';
 import express, { Request, Response } from 'express';
-import bcrypt from 'bcrypt';
-import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { store as orderStore } from './orders';
 import { verifiedAuthentication, verifiedAuthorization} from '../middleware/authentication'

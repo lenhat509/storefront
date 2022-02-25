@@ -1,14 +1,13 @@
 import express from 'express';
-import dotenv from 'dotenv';
-import { myUsersRoutes } from './handlers/users'
-import { myProductsRoutes } from './handlers/products';
-import { myOrdersRoutes } from './handlers/orders';
-import { myOrderProductRoutes } from './handlers/order_products';
+import { myUsersRoutes } from './src/handlers/users'
+import { myProductsRoutes } from './src/handlers/products';
+import { myOrdersRoutes } from './src/handlers/orders';
+import { myOrderProductRoutes } from './src/handlers/order_products';
 import bodyParser from 'body-parser'
 import cors from 'cors';
 
 const app = express();
-const port = process.env.PORT
+const port = process.env.PORT || 4000
 
 app.use(cors())
 app.use(bodyParser.json());
